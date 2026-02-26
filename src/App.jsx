@@ -40,13 +40,13 @@ const PrivateRoute = ({ children }) => {
     );
   }
   
-  return user ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/login" replace />;
 };
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/">
         <Routes>
           {/* Public Routes */}
           <Route element={<PublicLayout />}>
@@ -89,6 +89,9 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="settings" element={<Settings />} />
           </Route>
+          
+          {/* Catch all route */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </AuthProvider>
